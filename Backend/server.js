@@ -11,9 +11,15 @@ connectDB();
 const app = express();
 
 // Middleware
-app.use(express.json()); 
+app.use(express.json());
+
+const allowedOrigins = [
+  'http://localhost:5173',  
+  'https://intern-1-c8z8.onrender.com/' 
+];
 app.use(cors( {
-   origin: "http://localhost:5173"
+   origin: allowedOrigins,
+   credentials: true
 })); 
 app.get("/", (req, res) => {
   res.send("<h1>Hello from Express</h1>");
