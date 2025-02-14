@@ -13,14 +13,8 @@ const app = express();
 // Middleware
 app.use(express.json());
 
-const allowedOrigins = [
-  'http://localhost:5173',  
-  'https://intern-1-c8z8.onrender.com/' 
-];
-app.use(cors( {
-   origin: allowedOrigins,
-   credentials: true
-})); 
+
+app.use(cors()); 
 app.get("/", (req, res) => {
   res.send("<h1>Hello from Express</h1>");
 });
