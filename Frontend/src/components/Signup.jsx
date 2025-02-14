@@ -35,7 +35,7 @@ export default function SignUp() {
       isLogin && navigate("/home");
       !isLogin && setIsLogin(true);
     } catch (error) {
-      console.error("Error:", error.response.data.error);
+      console.error("Error:", error);
     }
   };
 
