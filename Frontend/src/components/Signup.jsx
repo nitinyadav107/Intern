@@ -4,7 +4,7 @@ import { toast } from "react-toastify";
 import { useAuth } from "../context/AuthProvider";
 
 export default function SignUp() {
-  const {navigate,backend_url} = useAuth();
+  const { navigate, backend_url } = useAuth();
   const [isLogin, setIsLogin] = useState(false);
   const [formData, setFormData] = useState({
     name: "",
@@ -35,6 +35,11 @@ export default function SignUp() {
       isLogin && navigate("/home");
       !isLogin && setIsLogin(true);
     } catch (error) {
+      if (error.response) {
+        toast.error(error.response.data.error);
+      } else {
+        console.error("Error:", error);
+      }
       console.error("Error:", error);
     }
   };
