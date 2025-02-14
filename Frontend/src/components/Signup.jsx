@@ -4,7 +4,7 @@ import { toast } from "react-toastify";
 import { useAuth } from "../context/AuthProvider";
 
 export default function SignUp() {
-  const {navigate} = useAuth();
+  const {navigate,backend_url} = useAuth();
   const [isLogin, setIsLogin] = useState(false);
   const [formData, setFormData] = useState({
     name: "",
@@ -23,7 +23,7 @@ export default function SignUp() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const endpoint = isLogin ? "/api/auth/login" : "/api/auth/signup";
+    const endpoint = isLogin ? `${backend_url}/api/auth/login` : `${backend_url}/api/auth/signup`;
 
     try {
       console.log(formData);

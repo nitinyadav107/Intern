@@ -1,14 +1,17 @@
 import React, { useState, useEffect } from 'react'
 import { toast } from 'react-toastify'
 import { useNavigate } from 'react-router'
-import {jwtDecode} from "jwt-decode";
+import { jwtDecode } from "jwt-decode";
 export const AuthContext = React.createContext()
 
+
 export const AuthProvider = ({ children }) => {
+  const backend_url = import.meta.env.VITE_BACKEND_URL; 
+
   let token = localStorage.getItem("token");
   if (token) {
     token = jwtDecode(token);
-    console.log(token); 
+    console.log(token);
   }
 
   const navigate = useNavigate();
@@ -22,7 +25,7 @@ export const AuthProvider = ({ children }) => {
   }
 
   return (
-    <AuthContext.Provider value={{ token, logout, navigate }}>
+    <AuthContext.Provider value={{ token, logout, navigate, backend_url }}>
       {children}
     </AuthContext.Provider>
   )

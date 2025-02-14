@@ -4,7 +4,7 @@ import { useAuth } from "../context/AuthProvider";
 import axios from "axios";
 
 const Profile = () => {
-  const { token } = useAuth();
+  const { token,backend_url } = useAuth();
   const [studentData, setStudentData] = useState(null);
   const [isEditing, setIsEditing] = useState(false);
   const [formData, setFormData] = useState({});
@@ -14,8 +14,8 @@ const Profile = () => {
       console.log(token.email)
       if (token) {
         try {
-          const res = await axios.post("/api/auth/bio", { email: token.email }); // ✅ Send email in body
-          console.log("Fetched Bio:", res.data);
+          const res = await axios.post(`${backend_url}/api/auth/bio`, { email: token.email }); // ✅ Send email in body
+          // console.log("Fetched Bio:", res.data);
           setStudentData(res.data.bio);
           setFormData(res.data.bio);
         } catch (err) {
@@ -34,7 +34,7 @@ const Profile = () => {
   const handleUpdate = async () => {
     try {
       console.log(formData);
-      const res = await axios.post("/api/auth/updatebio", { email: token.email,  formData });
+      const res = await axios.post(`${backend_url}/api/auth/updatebio`, { email: token.email,  formData });
       setStudentData(res.data.bio);
       
       setIsEditing(false);

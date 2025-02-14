@@ -12,10 +12,15 @@ const app = express();
 
 // Middleware
 app.use(express.json()); 
-app.use(cors()); 
+app.use(cors( {
+   origin: "http://localhost:5173"
+})); 
+app.get("/", (req, res) => {
+  res.send("<h1>Hello from Express</h1>");
+});
 
 // Routes
 app.use("/api/auth", router);
 
 const PORT = process.env.PORT || 5000;
-app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
+app.listen(PORT, () => console.log(`Server running on port http://localhost:${PORT}`));
